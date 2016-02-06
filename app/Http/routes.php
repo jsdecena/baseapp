@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
+    
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::resource('user',                       'Admin\UserController');
+});
+
+Route::controllers(['auth' => 'Auth\AuthController']);
