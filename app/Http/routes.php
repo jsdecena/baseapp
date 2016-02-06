@@ -25,4 +25,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::resource('role',                       'Admin\RoleController');
 });
 
+Route::group(['prefix' => 'api/v1' ], function () {
+    Route::resource('user',                       'Api\UserApiController');
+});
+
 Route::controllers(['auth' => 'Auth\AuthController']);
