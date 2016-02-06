@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            {!! $pages->links() !!}
+            {!! $pages->render() !!}
         </div>
     </div>
 </div>

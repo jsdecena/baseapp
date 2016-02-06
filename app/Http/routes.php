@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     });
 
     Route::resource('user',                       'Admin\UserController');
+    Route::resource('role',                       'Admin\RoleController');
 });
 
 Route::controllers(['auth' => 'Auth\AuthController']);
