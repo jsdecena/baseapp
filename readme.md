@@ -24,12 +24,14 @@ How to install
 - Run `php artisan serve` and go to [localhost:8000](http://localhost:8000)
 
 Admin credentials:
-email: admin@admin.com
-pass: Testing123
+
+- email: admin@admin.com
+- pass: Testing123
 
 Employee credentials:
-email: employee@employee.com
-pass: Testing123
+
+- email: employee@employee.com
+- pass: Testing123
 
 API calls:
 
