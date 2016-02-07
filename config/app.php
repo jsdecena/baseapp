@@ -138,6 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
 
         /*
          * Application Service Providers...
@@ -197,6 +198,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Form'      => Collective\Html\FormFacade::class,
+        'JWTAuth'   => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
     ],
 
 ];

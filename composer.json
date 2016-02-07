@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "~5.0",
         "intervention/image": "^2.3",
-        "bican/roles": "2.1.*"        
+        "bican/roles": "2.1.*",
+        "tymon/jwt-auth": "0.5.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
