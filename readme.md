@@ -33,19 +33,8 @@ Employee credentials:
 - email: employee@employee.com
 - pass: Testing123
 
-API calls:
-
-- [GET]       /api/v1/users - Gets all the users
-
-- [POST]      /api/v1/users - Create a user
-
-- [PUT]       /api/v1/users/:id - Update a user [fields: name, email, password]
-
-- [DELETE]    /api/v1/users/:id - Deletes a user
-
+API calls: [Now protected by JWT Authentication](https://github.com/jsdecena/baseapp/wiki/API-ENDPOINTS)
 
 Todo:
-
-- Wrap the API in Oauth2 (or JWT)
 
 - Thinking of using soft delete instead to prevent orphaned records
