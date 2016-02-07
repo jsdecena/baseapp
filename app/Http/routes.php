@@ -27,7 +27,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
 });
 
 Route::group(['prefix' => 'api/v1' ], function () {
-    Route::resource('user',                       'Api\UserApiController');
+    
+    Route::resource('authenticate', 'Api\AuthenticateController');
+
+    Route::group(['middleware' => ['jwt.auth']], function(){
+        Route::resource('user',                       'Api\UserApiController');
+    });
 });
 
 Route::controllers(['auth' => 'Auth\AuthController']);
