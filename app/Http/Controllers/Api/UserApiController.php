@@ -23,6 +23,20 @@ class UserApiController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        if (!User::find($id))
+            return response()->json(['error' => ['code' => '404', 'message' => 'User not found!']]);
+
+        return response()->json(['data' => User::find($id)]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
