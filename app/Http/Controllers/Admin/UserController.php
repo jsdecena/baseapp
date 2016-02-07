@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Role;
 
 class UserController extends Controller
 {/**
@@ -60,7 +62,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.users.edit', ['user' => User::find($id)]);
+        return view('admin.users.edit', [
+                                            'user'          => User::find($id),
+                                            'roles'         => Role::all(),
+                                            'user_role'     => User::find($id)->roles()->first()
+                                        ]);
     }
 
     /**
@@ -84,6 +90,11 @@ class UserController extends Controller
             $user->password = Hash::make($request->input('password'));
         }
 
+        if ($request->has('role')) {
+            $user->detachAllRoles();
+            $user->attachRole($request->input('role'));
+        }
+
         $user->updated_at = date('Y-m-d');
         $user->save();
 
@@ -103,4 +114,13 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index')->with('success', 'Successfully deleted!');
     }
+
+    public function dettach(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $user->detachRole($request->input('role'));
+
+        return redirect()->route('admin.user.edit', $id)->with('success', 'Success!');
+    }    
 }

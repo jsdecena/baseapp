@@ -13,8 +13,9 @@
                                 <table class="table">
                                     <tr>
                                       <th class="col-md-1">#</th>
-                                      <th class="col-md-4">Name</th>
+                                      <th class="col-md-2">Name</th>
                                       <th class="col-md-2">Email</th>
+                                      <th class="col-md-2">Role</th>
                                       <th class="col-md-1">Created</th>
                                       <th class="col-md-2">Actions</th>
                                     </tr>
@@ -23,10 +24,15 @@
                                           <td>{{$user->id}}</td>
                                           <td><a href="{{route('admin.user.edit', $user->id)}}">{{$user->name}}</a></td>
                                           <td>{{$user->email}}</td>
+                                          <td>
+                                              @foreach($user->roles as $role)
+                                                <span class="label label-success">{{$role->name}}</span>
+                                              @endforeach
+                                          </td>
                                           <td>{{$user->created_at->format('d M Y')}}</td>
                                           <td>
                                                 {!!Form::open(['url' => route('admin.user.destroy', $user->id), 'method' => 'delete' ])!!}
-                                                    <a href="{{route('admin.user.edit', $user->id)}}" class="btn btn-sml btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                                                    <a href="{{route('admin.user.edit', $user->id)}}" class="btn btn-sml btn-primary"><i class="fa fa-pencil"></i> Edit</a>
                                                     <button type="submit" class="btn btn-sml btn-danger" onClick="return confirm('Are you sure you want to delete?')"><i class="fa fa-timex"></i> Delete</button>
                                                 {!!Form::close()!!}
                                           </td>

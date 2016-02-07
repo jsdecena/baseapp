@@ -29,6 +29,14 @@
                           <label>Password</label>
                           <input name="password" type="Password" class="form-control" placeholder="******">
                         </div>
+                        <div class="form-group">
+                          <label>Assign a role</label>
+                          <select name="role" id="role" class="form-control">
+                                @foreach($roles as $role)
+                                    <option @if($user_role->id == $role->id) selected="selected" @endif value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
+                          </select>
+                        </div>                        
 
                         <a href="{{route('admin.user.index')}}" class="btn btn-default">Back</a>
                         <button type="submit" class="btn btn-sml btn-primary">Update</button>

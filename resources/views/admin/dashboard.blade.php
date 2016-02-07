@@ -17,7 +17,7 @@
 
   <!-- Main content -->
   <section class="content">
-
+  @include('messages')
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">

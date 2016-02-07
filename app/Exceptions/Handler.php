@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use \Bican\Roles\Exceptions\RoleDeniedException;
+use \Bican\Roles\Exceptions\PermissionDeniedException;
+use \Bican\Roles\Exceptions\LevelDeniedException;
 
 class Handler extends ExceptionHandler
 {
@@ -43,7 +46,12 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         if ($e instanceof ModelNotFoundException) {
+        
             $e = new NotFoundHttpException($e->getMessage(), $e);
+        
+        }else if ($e instanceof RoleDeniedException) {
+            // you can for example flash message, redirect...
+            return redirect()->route('admin..index')->with('error', 'Ooops. You do not have access to that page.');
         }
 
         return parent::render($request, $e);

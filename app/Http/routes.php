@@ -12,17 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to('admin');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    });
+    Route::resource('/',                       'Admin\AdminController');
 
-    Route::resource('user',                       'Admin\UserController');
-    Route::resource('role',                       'Admin\RoleController');
+    Route::group(['middleware' => ['role:admin']], function()
+    {
+        Route::resource('user',                       'Admin\UserController');
+        Route::resource('role',                       'Admin\RoleController');
+    });
 });
 
 Route::group(['prefix' => 'api/v1' ], function () {
