@@ -1,7 +1,7 @@
-## My Base Application for Laravel >=5.1 with User roles
+## My Base Application for Laravel 5.1 with User roles
 
-This base application will be a starting point in creating a web app from scratch but fully loaded with User Authentication and User Roles.
-User Roles are not applicable in >5.2 since that caters already with the multi auth.
+This base application will be a starting point in creating a web app from scratch but fully loaded with User Authentication and Authorization (roles).
+The package used for authorization on this project is not yet compatible with 5.2.*. 
 
 Requirements:
 - [Laravel 5 requirements](https://laravel.com/docs/5.1/installation#installation)
