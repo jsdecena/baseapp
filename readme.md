@@ -33,7 +33,7 @@ Employee credentials:
 - email: employee@employee.com
 - pass: Testing123
 
-API calls: [Now protected by JWT Authentication](https://github.com/jsdecena/baseapp/wiki/API-ENDPOINTS)
+API calls: [Now protected by JWT Authentication](https://github.com/jsdecena/baseapp/wiki)
 
 Todo:
 
