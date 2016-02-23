@@ -19,4 +19,12 @@ class Role extends Model
      * @var array
      */
     protected $hidden = [];
+
+    /**
+     * The users that belong to the role.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }    
 }

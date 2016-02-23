@@ -8,9 +8,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
+use Hash;
 
 class UserController extends Controller
-{/**
+{
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -27,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.users.create', ['roles' => Role::all()]);
     }
 
     /**
@@ -49,7 +51,11 @@ class UserController extends Controller
             'password'  => Hash::make($request->input('password'))
         ];
 
-        User::create($data);
+        $newUser = User::create($data);
+
+        //SYNC THE USER TO THE ROLE
+        $user = User::find($newUser->id);
+        $user->roles()->sync([$request->input('role')]);
 
         return redirect()->route('admin.user.index')->with('success', 'Successfully created!');
     }

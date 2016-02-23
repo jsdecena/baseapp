@@ -29,7 +29,14 @@
                           <label>Password</label>
                           <input name="password" type="Password" class="form-control" placeholder="******">
                         </div>
-
+                        <div class="form-group">
+                          <label>Role</label>
+                          <select name="role" id="role" class="form-control">
+                              @foreach($roles as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                              @endforeach
+                          </select>
+                        </div>
                         <a href="{{route('admin.user.index')}}" class="btn btn-default">Back</a>
                         <button type="submit" class="btn btn-sml btn-primary">Create</button>
                     {!!Form::close()!!}
