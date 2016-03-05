@@ -18,6 +18,7 @@ var config = {
 elixir(function(mix) {
     mix.sass('app.scss');
 
+    //STYLES FOR THE BACKEND
     mix.styles([
         config.bowerDir + 'bootstrap/dist/css/bootstrap.min.css',
         config.bowerDir + 'font-awesome/css/font-awesome.min.css',
@@ -27,8 +28,17 @@ elixir(function(mix) {
         config.bowerDir + 'mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
         config.bowerDir + 'trumbowyg/dist/ui/trumbowyg.min.css',
         config.bowerDir + 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css',
-    ])
-    .scripts([
+    ], 'public/css/admin/admin.css');
+    
+    /*
+    * You can put here the styles and scripts for the front end
+    *
+    * Assume that the assets for front end is in /resources/assets/css
+    * eg. mix.styles(['styles.css'], 'public/css/front/styles.css');
+    */
+
+    //SCRIPTS FOR THE BACKEND
+    mix.scripts([
         config.bowerDir + 'jquery/dist/jquery.min.js',
         config.bowerDir + 'bootstrap/dist/js/bootstrap.min.js',
         config.bowerDir + 'slimscroll/jquery.slimscroll.min.js',
@@ -42,8 +52,16 @@ elixir(function(mix) {
         config.bowerDir + 'raphael/raphael-min.js',
         config.bowerDir + 'morris.js/morris.min.js',
         'scripts.js'
-    ])
-    .copy('./bower_components/font-awesome/fonts', 'public/fonts')
+    ], 'public/js/admin/admin.js');
+
+    /*
+    * You can put here the styles and scripts for the front end
+    *
+    * Assume that the assets for front end is in /resources/assets/js
+    * eg. mix.scripts(['front.js'], 'public/js/front/front.js');
+    */    
+
+    mix.copy('./bower_components/font-awesome/fonts', 'public/fonts')
     .copy('./bower_components/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker', 'public/img/bootstrap-colorpicker')
     .copy('./bower_components/AdminLTE/dist/img', 'public/img')
     .copy('./bower_components/trumbowyg/dist/ui/images', 'public/css/images');
