@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminLTE 2 | Log in</title>
     <!-- bower::css-->
-    <link rel="stylesheet" href="{{asset('css/all.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
     <!-- endbower::css-->
   </head>
   <body class="hold-transition login-page">
@@ -54,7 +54,7 @@
     </div><!-- /.login-box -->
 
     <!-- bower:js-->
-    <script type="text/javascript" src="{{asset('js/all.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
     <!-- endbower:js-->
   </body>
 </html>
