@@ -28,7 +28,7 @@ elixir(function(mix) {
         config.bowerDir + 'mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
         config.bowerDir + 'trumbowyg/dist/ui/trumbowyg.min.css',
         config.bowerDir + 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css',
-    ], 'public/css/admin/admin.css');
+    ], 'public/css/admin.css');
     
     /*
     * You can put here the styles and scripts for the front end
@@ -52,7 +52,7 @@ elixir(function(mix) {
         config.bowerDir + 'raphael/raphael-min.js',
         config.bowerDir + 'morris.js/morris.min.js',
         'scripts.js'
-    ], 'public/js/admin/admin.js');
+    ], 'public/js/admin.js');
 
     /*
     * You can put here the styles and scripts for the front end
