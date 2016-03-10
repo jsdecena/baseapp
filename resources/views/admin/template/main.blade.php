@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>BaseApp | Blank Page</title>
     <!-- bower::css-->
-    <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin.css')}}">
     <!-- endbower::css-->    
   </head>
   <body class="hold-transition skin-red sidebar-mini">
@@ -29,7 +29,7 @@
     </div><!-- ./wrapper -->
 
     <!-- bower:js-->
-    <script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/admin.js')}}"></script>
     <!-- endbower:js-->
   </body>
 </html>
