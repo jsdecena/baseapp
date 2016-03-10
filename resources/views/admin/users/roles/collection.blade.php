@@ -17,7 +17,7 @@
             <div class="col-md-12">
               <div class="box">
                 <div class="box-body">
-                    {!!Form::open(['url' => route('roles.attach', $role->id)])!!}
+                    {!!Form::open(['url' => route('admin.role.attach', $role->id)])!!}
                         <div class="form-group">
                             <label for="user">User</label>
                             <select name="user" id="user" class="form-control">
@@ -28,6 +28,30 @@
                         </div>
                         <button class="btn btn-primary" type="submit">Add this user</button>
                     {!!Form::close()!!}
+                    @if(!$user_roles->isEmpty())
+                        <hr />
+                    {!!Form::open(['url' => route('admin.role.detach', $role->id)])!!}
+                        <table class="table">
+                            <thead>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                @foreach($user_roles as $user)
+                                    <tr>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td>
+                                            <input type="hidden" name="userID" value="{{$user->id}}">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    {!!Form::close()!!}
+                    @endif                    
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->

@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::group(['middleware' => ['role:admin']], function()
     {
         Route::resource('user',                       'Admin\UserController');
+        Route::post('roles/attach/{id}',              [ 'as' => 'admin.role.attach', 'uses' => 'Admin\RoleController@attach']);
+        Route::post('roles/detach/{id}',              [ 'as' => 'admin.role.detach', 'uses' => 'Admin\RoleController@detach']);
         Route::resource('role',                       'Admin\RoleController');
     });
 });

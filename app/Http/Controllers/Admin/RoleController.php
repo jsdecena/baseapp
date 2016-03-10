@@ -120,5 +120,23 @@ class RoleController extends Controller
 
             return redirect()->route('admin.role.index')->with('error', $e->getMessage());
         }
-    }   
+    }
+
+    public function attach(Request $request, $id)
+    {
+        $user = User::find($request->input('user'));
+
+        $user->attachRole($id);
+
+        return redirect()->route('admin.role.show', $id)->with('success', 'Successfully added this user on this role!');
+    }
+
+    public function detach(Request $request, $id)
+    {
+        $user = User::find($request->input('userID'));
+
+        $user->detachRole($id);
+
+        return redirect()->route('admin.role.show', $id)->with('success', 'Successfully removed this user on this role!');
+    }    
 }
