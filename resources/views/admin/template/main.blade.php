@@ -19,9 +19,9 @@
 
         <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
+          <b>Version</b> 0.0.1
         </div>
-        <strong>Copyright &copy; {{date('Y')}} <a href="{{url('/')}}">Base Application</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; {{date('Y')}} <a href="{{url('https://github.com/jsdecena/baseapp')}}">Base Application</a>.</strong> All rights reserved.
         </footer>
         
         @include('admin.template.control-sidebar')

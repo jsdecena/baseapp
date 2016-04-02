@@ -6,11 +6,21 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Models\User;
+use App\Repositories\UserRepository as User;
+use App\Repositories\RoleRepository as Role;
 
 class RoleController extends Controller
 {
+    private $role;
+
+    private $user;
+
+    function __construct(Role $role, User $user)
+    {
+        $this->role = $role;
+        $this->user = $user;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +28,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('admin.users.roles.list', ['roles' => Role::paginate(20)]);
+        return view('admin.users.roles.list', ['roles' => $this->role->paginate(20)]);
     }
 
     /**
@@ -43,11 +53,13 @@ class RoleController extends Controller
             'name'         => 'required|unique:roles',
         ]);
 
-        Role::create([
-            'name' => $request->input('name'),
-            'slug' => str_slug($request->input('name')),
-            'description' => $request->input('description')
-        ]);
+        $data = [
+            'name' 			=> $request->input('name'),
+            'slug' 			=> str_slug($request->input('name')),
+            'description' 	=> $request->input('description')
+        ];
+
+		$this->role->create($data);
 
         return redirect()->route('admin.role.index')->with('success', 'Successfully created!');
     }
@@ -61,9 +73,9 @@ class RoleController extends Controller
     public function show($id)
     {
         return view('admin.users.roles.collection', [
-                                                        'role'          => Role::find($id), 
-                                                        'users'         => User::orderBy('email', 'asc')->get(),
-                                                        'user_roles'    => Role::find($id)->users,
+                                                        'role'          => $this->role->find($id), 
+                                                        'users'         => $this->user->all(),
+                                                        'user_roles'    => $this->role->find($id)->users,
                                                     ]);
     }    
 
@@ -75,7 +87,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.users.roles.edit', ['role' => Role::find($id)]);
+        return view('admin.users.roles.edit', ['role' => $this->role->find($id)]);
     }
 
     /**
@@ -91,7 +103,7 @@ class RoleController extends Controller
             'name'         => 'required',
         ]);
 
-        $role                   = Role::find($id);
+        $role                   = $this->role->find($id);
         $role->name             = $request->input('name');
         $role->slug             = str_slug($request->input('name'));
         $role->description      = $request->input('description');
@@ -108,7 +120,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role  = Role::find($id);
+        $role  = $this->role->find($id);
 
         try {
 
@@ -124,7 +136,7 @@ class RoleController extends Controller
 
     public function attach(Request $request, $id)
     {
-        $user = User::find($request->input('user'));
+        $user = $this->user->find($request->input('user'));
 
         $user->attachRole($id);
 
@@ -133,7 +145,7 @@ class RoleController extends Controller
 
     public function detach(Request $request, $id)
     {
-        $user = User::find($request->input('userID'));
+        $user = $this->user->find($request->input('userID'));
 
         $user->detachRole($id);
 
