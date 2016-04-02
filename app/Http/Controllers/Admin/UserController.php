@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Role;
 use Hash;
 
+use App\Repositories\UserRepository as User;
+
 class UserController extends Controller
 {
+    private $user;
+
+    function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.list', ['users' => User::orderBy('id', 'desc')->paginate(20)]);
+        return view('admin.users.list', ['users' => $this->user->paginate(20)]);
     }
 
     /**
@@ -51,10 +59,11 @@ class UserController extends Controller
             'password'  => Hash::make($request->input('password'))
         ];
 
-        $newUser = User::create($data);
+		
+        $newUser = $this->user->create($data);
 
         //SYNC THE USER TO THE ROLE
-        $user = User::find($newUser->id);
+        $user = $this->user->find($newUser->id);
         $user->roles()->sync([$request->input('role')]);
 
         return redirect()->route('admin.user.index')->with('success', 'Successfully created!');
@@ -69,9 +78,9 @@ class UserController extends Controller
     public function edit($id)
     {
         return view('admin.users.edit', [
-                                            'user'          => User::find($id),
+                                            'user'          => $this->user->find($id),
                                             'roles'         => Role::all(),
-                                            'user_role'     => User::find($id)->roles()->first()
+                                            'user_role'     => $this->user->find($id)->roles()->first()
                                         ]);
     }
 
@@ -88,7 +97,7 @@ class UserController extends Controller
             'email'         => 'required|email'
         ]);
 
-        $user           = User::find($id);
+        $user           = $this->user->find($id);
         $user->name     = $request->input('name');
         $user->email    = $request->input('email');
 
@@ -115,7 +124,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = $this->user->find($id);
         $user->delete();
 
         return redirect()->route('admin.user.index')->with('success', 'Successfully deleted!');
@@ -123,7 +132,7 @@ class UserController extends Controller
 
     public function dettach(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = $this->user->find($id);
 
         $user->detachRole($request->input('role'));
 
